@@ -17,6 +17,24 @@ services:
     ports:
       - 8096:8096
 
+  tdl_material:
+    container_name: youtubedl
+    image: tzahi12345/youtubedl-material:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/youtubedl/appdata:/app/appdata
+      - /downloads/audio:/app/audio
+      - /downloads/video:/app/video
+      - /config/youtubedl/subscriptions:/app/subscriptions
+      - /config/youtubedl/users:/app/users
+    ports:
+      - 8998:17442
+
   deluge:
     container_name: deluge
     image: linuxserver/deluge:latest
