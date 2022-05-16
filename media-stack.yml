@@ -1,0 +1,85 @@
+version: "3.4"
+services:
+
+  jellyfin:
+    container_name: jellyfin
+    image: lscr.io/linuxserver/jellyfin:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/jellyfin:/config
+      - /downloads:/downloads
+      - /complete/:/complete
+    ports:
+      - 8096:8096
+
+  deluge:
+    container_name: deluge
+    image: linuxserver/deluge:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /downloads:/downloads
+      - /config/deluge:/config
+    ports:
+      - 8112:8112
+      - 58846:58846
+      - 6881:6881
+
+  jackett:
+    container_name: jackett
+    image: linuxserver/jackett:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /downloads/torrent-blackhole:/downloads
+      - /config/jackett:/config
+    ports:
+      - 9117:9117
+
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /config/sonarr:/config
+      - /complete/tv:/tv
+      - /downloads:/downloads
+    ports:
+      - 8989:8989
+
+  radarr:
+    container_name: radarr
+    image: linuxserver/radarr:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /config/radarr:/config
+      - /complete/movies:/movies
+      - /downloads:/downloads
+    ports:
+      - 7878:7878

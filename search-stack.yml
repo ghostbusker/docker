@@ -1,0 +1,58 @@
+version: '3.4'
+services:
+
+  libreddit:
+    container_name: libreddit
+    image: spikecodes/libreddit
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/libreddit:/config
+    ports:
+      - 1337:8080
+
+  whoogle-search:
+    container_name: whoogle-search
+    image: benbusby/whoogle-search:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/whoogle-search:/config
+    ports:
+      - 5000:5000
+
+  code-server:
+    container_name: code-server
+    image: lscr.io/linuxserver/code-server:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/code-server:/config
+    ports:
+      - 8443:8443
+
+  homer:
+    container_name: homer
+    image: b4bz/homer:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/homer:/www/assets
+    ports:
+      - 8080:8080
