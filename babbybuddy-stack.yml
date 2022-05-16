@@ -1,0 +1,16 @@
+version: "3.4"
+services:
+  babybuddy:
+    container_name: babybuddy
+    image: lscr.io/linuxserver/babybuddy:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - CSRF_TRUSTED_ORIGINS=http://127.0.0.1:8000,https://babybuddy.domain.com
+    volumes:
+      - /config/babybuddy:/config
+    ports:
+      - 8483:8000
