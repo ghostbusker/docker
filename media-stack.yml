@@ -28,10 +28,10 @@ services:
       - TZ=America/New_York
     volumes:
       - /config/youtubedl/appdata:/app/appdata
-      - /downloads/audio:/app/audio
-      - /downloads/video:/app/video
-      - /config/youtubedl/subscriptions:/app/subscriptions
       - /config/youtubedl/users:/app/users
+      - /downloads:/app/audio
+      - /downloads:/app/video
+      - /downloads:/app/subscriptions
     ports:
       - 8998:17442
 
