@@ -42,7 +42,7 @@ services:
       - /config/code-server:/config
       - /config:/shared-access
     ports:
-      - 8443:8443
+      - 9123:8443
 
   homer:
     container_name: homer
