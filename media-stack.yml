@@ -19,7 +19,7 @@ services:
 
   tdl_material:
     container_name: youtubedl
-    image: tzahi12345/youtubedl-material:latest
+    image: tzahi12345/youtubedl-material:nightly
     restart: unless-stopped
     network_mode: bridge
     environment:
