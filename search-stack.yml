@@ -64,18 +64,18 @@ services:
     ports:
       - 8080:8080
       
-  filebrowser:
-    container_name: filebrowser
-    image: filebrowser/filebrowser:latest
-    restart: unless-stopped
-    network_mode: bridge
+  projectsend:
+    image: lscr.io/linuxserver/projectsend:latest
+    container_name: projectsend
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
+      - MAX_UPLOAD=<5000>
     volumes:
-      - /config/filebrowser/database.db:/database.db
-      - /config/filebrowser/.filebrowser.json:/.filebrowser.json
-      - /:/srv
+      - /config/projectsend:/config
+      - /:/data
     ports:
-      - 8899:80
+      - 8181:80
+    restart: unless-stopped
+
