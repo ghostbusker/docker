@@ -1,0 +1,17 @@
+version: "3"
+services:
+
+  dashdot:
+    container_name: dashdot
+    image: mauricenino/dashdot:latest
+    privileged: true
+
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+          - PUID=1000
+          - PGID=1000
+          - TZ=America/New_York
+          - DASHDOT_OVERRIDE_DISTRO="Debian"
+    ports:
+      - '3001:3001'
