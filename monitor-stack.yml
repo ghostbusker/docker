@@ -12,6 +12,8 @@ services:
           - PUID=1000
           - PGID=1000
           - TZ=America/New_York
-          - DASHDOT_OVERRIDE_DISTRO="Debian"
+          - DASHDOT_ENABLE_TILT=true
+          - DASHDOT_OS_WIDGET_ENABLE=false
+          - DASHDOT_ENABLE_CPU_TEMPS=true
     ports:
       - '3001:3001'
