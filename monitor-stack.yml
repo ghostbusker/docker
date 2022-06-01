@@ -5,15 +5,33 @@ services:
     container_name: dashdot
     image: mauricenino/dashdot:latest
     privileged: true
-
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - DASHDOT_ENABLE_TILT=true
+      - DASHDOT_OS_WIDGET_ENABLE=false
+      - DASHDOT_ENABLE_CPU_TEMPS=true
+    volumes:
+      - type: bind
+        source: /sys/class/net/ens18
+        target: /mnt/eth0
+    ports:
+      - '3001:3001'
+    
+  wetty:
+    container_name: wetty
+    image: wettyoss/wetty:latest
+    privileged: true
     restart: unless-stopped
     network_mode: bridge
     environment:
           - PUID=1000
           - PGID=1000
           - TZ=America/New_York
-          - DASHDOT_ENABLE_TILT=true
-          - DASHDOT_OS_WIDGET_ENABLE=false
-          - DASHDOT_ENABLE_CPU_TEMPS=true
+          - SSH-USER=user
+          - SSH-PASS=password
     ports:
-      - '3001:3001'
+      - '3000:3000'
