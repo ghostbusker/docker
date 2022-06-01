@@ -5,7 +5,7 @@ services:
     container_name: dashdot
     image: mauricenino/dashdot:latest
     privileged: true
-    restart: unless-stopped
+    restart: always
     network_mode: bridge
     environment:
       - PUID=1000
@@ -25,7 +25,7 @@ services:
     container_name: wetty
     image: wettyoss/wetty:latest
     privileged: true
-    restart: unless-stopped
+    restart: always
     network_mode: bridge
     environment:
           - PUID=1000
@@ -35,3 +35,19 @@ services:
           - SSH-PASS=password
     ports:
       - '3000:3000'
+  
+  uptime-kuma:
+    container_name: uptime-kuma
+    image: louislam/uptime-kuma:latest
+    restart: always
+    network_mode: bridge
+    environment:
+          - PUID=1000
+          - PGID=1000
+          - TZ=America/New_York
+    volumes:
+      - type: bind
+        source: /config/uptime-kuma
+        target: /app/data
+    ports:
+      - '3002:3001'
