@@ -101,3 +101,17 @@ services:
       - /downloads:/downloads
     ports:
       - 7878:7878
+      
+  prowlarr:
+    container_name: prowlarr
+    image: linuxserver/prowlarr:develop
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/prowlarr:/config
+    ports:
+      - 9696:9696
