@@ -10,6 +10,10 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
+      - LIBREDDIT_DEFAULT_THEME=black
+      - LIBREDDIT_DEFAULT_SHOW_NSFW=on
+      - LIBREDDIT_DEFAULT_USE_HLS=on
+      - LIBREDDIT_DEFAULT_HIDE_HLS_NOTIFICATION=on
     volumes:
       - /config/libreddit:/config
     ports:
@@ -64,18 +68,17 @@ services:
     ports:
       - 8080:8080
       
-  projectsend:
-    image: lscr.io/linuxserver/projectsend:latest
-    container_name: projectsend
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/New_York
-      - MAX_UPLOAD=<5000>
-    volumes:
-      - /config/projectsend:/config
-      - /:/data
-    ports:
-      - 8181:80
-    restart: unless-stopped
-
+#  projectsend:
+#    image: lscr.io/linuxserver/projectsend:latest
+#    container_name: projectsend
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=America/New_York
+#      - MAX_UPLOAD=<5000>
+#    volumes:
+#      - /config/projectsend:/config
+#      - /:/data
+#    ports:
+#      - 8181:80
+#    restart: unless-stopped
