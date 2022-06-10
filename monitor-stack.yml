@@ -1,4 +1,4 @@
-version: "3"
+version: "3.5"
 services:
 
   dashdot:
@@ -6,18 +6,16 @@ services:
     image: mauricenino/dashdot:latest
     privileged: true
     restart: always
-    network_mode: bridge
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/New_York
       - DASHDOT_ENABLE_TILT=true
-      - DASHDOT_OS_WIDGET_ENABLE=false
+      - DASHDOT_DISABLE_HOST=true
       - DASHDOT_ENABLE_CPU_TEMPS=true
     volumes:
-      - type: bind
-        source: /sys/class/net/ens18
-        target: /mnt/eth0
+      - /sys/class/net/ens18:/mnt/eth0:ro
+      - /etc/os-release:/etc/os-release:ro
+      - /proc/1/ns/net:/mnt/host_ns_net:ro
+      - /media:/mnt/host_media:ro
+      - /mnt:/mnt/host_mnt:ro
     ports:
       - '3001:3001'
     
