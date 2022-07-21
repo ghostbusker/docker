@@ -1,0 +1,15 @@
+version: "3.0"
+services:
+  mumble:
+    container_name: mumble
+    image: coppit/mumble-server
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /config/mumble:/data
+    ports:
+      - 64738:64738
