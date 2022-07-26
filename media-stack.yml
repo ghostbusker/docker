@@ -115,3 +115,15 @@ services:
       - /config/prowlarr:/config
     ports:
       - 9696:9696
+    
+  rickroll:
+    container_name: rickroll
+    image: kale5/rickroll:latest
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    ports:
+      - 1818:80
