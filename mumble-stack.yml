@@ -12,4 +12,5 @@ services:
     volumes:
       - /config/mumble:/data
     ports:
-      - 64738:64738
+      - 64738:64738/udp
+      - 5353:5353/udp    #bonjour
