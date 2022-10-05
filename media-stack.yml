@@ -29,7 +29,7 @@ services:
     volumes:
       - /config/youtubedl/appdata:/app/appdata
       - /config/youtubedl/users:/app/users
-      - /downloads:/app/audio
+      - /downloads/audio:/app/audio
       - /downloads:/app/video
       - /downloads:/app/subscriptions
     ports:
@@ -114,8 +114,8 @@ services:
     volumes:
       - /config/prowlarr:/config
     ports:
-      - 9696:9696
-    
+      - 9666:9696
+      
   rickroll:
     container_name: rickroll
     image: kale5/rickroll:latest
@@ -127,3 +127,19 @@ services:
       - TZ=America/New_York
     ports:
       - 1818:80
+      
+  filebrowser:
+    container_name: filebrowser
+    image: hurlenko/filebrowser:latest
+    network_mode: bridge
+    environment:
+      - FB_BASEURL=/filebrowser
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes: 
+      - /downloads:/data
+      - /config/filebrowser:/config 
+    ports:
+      - 8484:8080
+      
